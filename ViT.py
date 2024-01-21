@@ -127,7 +127,7 @@ class Vit(nn.Module):
     def forward(self, x):
         y = self.patch_embedding(x)
         B, seq, _ = y.shape
-        y += self.pos_embedding[:, seq, :]
+        y += self.pos_embedding[:, :seq, :]
         cls_token = self.cls_token.repeat((B, 1, 1))
         y = torch.cat([y, cls_token], dim=1)
         y = self.dropout(y)
